@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginStart="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/news_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:padding="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="@string/news_article_text" />
+
+    <TextView
+        android:id="@+id/news_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:padding="16dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/darker_gray"
+        tools:text="@string/news_date" />
+
+
+    <TextView
+        android:id="@+id/news_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:padding="16dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/darker_gray"
+        tools:text="@string/news_section_text" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/darker_gray"></View>
+
+</LinearLayout>
