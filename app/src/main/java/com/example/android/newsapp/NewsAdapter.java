@@ -39,15 +39,18 @@ public class NewsAdapter extends ArrayAdapter<News> {
         articleView.setText(currentNews.getArticle());
 
         TextView dateView = (TextView) listItemView.findViewById(R.id.news_date);
-        String currentDateFormat = "2016-09-26T15:57:34Z";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss");
+       
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ss'Z'");
         Date date = null;
         try {
             date = simpleDateFormat.parse(currentNews.getDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-       dateView.(currentNews.getDate();
+        SimpleDateFormat newDateFormat= new SimpleDateFormat("MMM dd, yyyy hh:mm:ss");
+        String finalDate = newDateFormat.format(date);
+
+        dateView.setText(finalDate);
 
 
 
