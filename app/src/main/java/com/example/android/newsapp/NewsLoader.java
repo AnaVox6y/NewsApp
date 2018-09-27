@@ -17,7 +17,8 @@ import java.util.List;
  * +
  */
 
-public class NewsLoader extends AsyncTaskLoader<List<News>> {
+public class NewsLoader extends AsyncTaskLoader<List<News>>
+{
 
     /**
      * Tag for log messages
@@ -35,14 +36,15 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
      * @param context of the activity
      * @param url     to load data from
      */
-    public NewsLoader(Context context, String url) {
+    public NewsLoader(Context context, String url)
+    {
         super(context);
         mUrl = url;
     }
 
     @Override
-    protected void onStartLoading() {
-
+    protected void onStartLoading()
+    {
         Log.i(LOG_TAG, "TEST: onStartLoading() called ...");
         forceLoad();
     }
@@ -51,9 +53,11 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
      * This is on a background thread.
      */
     @Override
-    public List<News> loadInBackground() {
+    public List<News> loadInBackground()
+    {
         Log.i(LOG_TAG, "TEST: loadInBackground() called ...");
-        if (mUrl == null) {
+        if (mUrl == null)
+        {
             return null;
         }
 

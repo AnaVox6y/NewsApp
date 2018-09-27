@@ -25,7 +25,8 @@ import java.util.List;
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
  */
-public final class QueryUtils {
+public final class QueryUtils
+{
     /**
      * Tag for the log messages
      */
@@ -35,7 +36,8 @@ public final class QueryUtils {
     /**
      * Query the GUARDIAN API dataset and return a list of {@link News} objects.
      */
-    public static List<News> fetchNewsData(String requestUrl) {
+    public static List<News> fetchNewsData(String requestUrl)
+    {
 
         Log.i(LOG_TAG, "TEST: fetchNewsData() called ...");
         // Create URL object
@@ -43,14 +45,20 @@ public final class QueryUtils {
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
-        try {
+        try
+        {
             jsonResponse = makeHttpRequest(url);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
-        try {
+        try
+        {
             Thread.sleep(2000);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
 
@@ -64,11 +72,15 @@ public final class QueryUtils {
     /**
      * Returns new URL object from the given string URL.
      */
-    private static URL createUrl(String stringUrl) {
+    private static URL createUrl(String stringUrl)
+    {
         URL url = null;
-        try {
+        try
+        {
             url = new URL(stringUrl);
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             Log.e(LOG_TAG, "Problem building the URL ", e);
         }
         return url;
@@ -77,17 +89,20 @@ public final class QueryUtils {
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-    private static String makeHttpRequest(URL url) throws IOException {
+    private static String makeHttpRequest(URL url) throws IOException
+    {
         String jsonResponse = "";
 
         // If the URL is null, then return early.
-        if (url == null) {
+        if (url == null)
+        {
             return jsonResponse;
         }
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
-        try {
+        try
+        {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(10000 /* milliseconds */);
             urlConnection.setConnectTimeout(15000 /* milliseconds */);
@@ -96,19 +111,28 @@ public final class QueryUtils {
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == 200)
+            {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            } else {
+            }
+            else
+                {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e(LOG_TAG, "Problem retrieving the news JSON results.", e);
-        } finally {
-            if (urlConnection != null) {
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
                 urlConnection.disconnect();
             }
-            if (inputStream != null) {
+            if (inputStream != null)
+            {
                 // Closing the input stream could throw an IOException, which is why
                 // the makeHttpRequest(URL url) method signature specifies than an IOException
                 // could be thrown.
@@ -122,13 +146,16 @@ public final class QueryUtils {
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
      */
-    private static String readFromStream(InputStream inputStream) throws IOException {
+    private static String readFromStream(InputStream inputStream) throws IOException
+    {
         StringBuilder output = new StringBuilder();
-        if (inputStream != null) {
+        if (inputStream != null)
+        {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
-            while (line != null) {
+            while (line != null)
+            {
                 output.append(line);
                 line = reader.readLine();
             }
@@ -136,13 +163,16 @@ public final class QueryUtils {
         return output.toString();
     }
 
-    private static List<News> extractFeatureFromJson(String newsJSON) {
+    private static List<News> extractFeatureFromJson(String newsJSON)
+    {
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(newsJSON)) {
+        if (TextUtils.isEmpty(newsJSON))
+        {
             return null;
         }
         List<News> articles = new ArrayList<>();
-        try {
+        try
+        {
 
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
@@ -155,9 +185,9 @@ public final class QueryUtils {
             JSONArray newsArray = properties.getJSONArray("results");
 
 // For each news article in the newsArray, create an {@link News} object
-            for (int i = 0; i < newsArray.length(); i++) {
+            for (int i = 0; i < newsArray.length(); i++)
+            {
                 // Get a single news article at position i within the list of news articles
-
                 JSONObject currentNewsArticle = newsArray.getJSONObject(i);
 
                 // Extract the value for the key called "webTitle"
@@ -168,15 +198,16 @@ public final class QueryUtils {
                 // Extract the value for the key called "sectionName"
                 String sectionName = "";
 
-
                 // Extract the value for the key called "url"
                 String url = currentNewsArticle.getString("webUrl");
 
-                if (currentNewsArticle.has("webTitle")) {
+                if (currentNewsArticle.has("webTitle"))
+                {
                     articleName = currentNewsArticle.getString("webTitle");
                 }
 
-                if (currentNewsArticle.has("sectionName")) {
+                if (currentNewsArticle.has("sectionName"))
+                {
                     sectionName = currentNewsArticle.getString("sectionName");
                 }
 
@@ -186,8 +217,9 @@ public final class QueryUtils {
                 // Add the new {@link News} to the list of news articles.
                 articles.add(article);
             }
-
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.

@@ -23,11 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:padding="16dp"
+        android:textColor="@android:color/darker_gray"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:textColor="@android:color/darker_gray"
-        tools:text="@string/news_date" />
-
+        tools:text="@string/news_date_text" />
 
     <TextView
         android:id="@+id/news_section"
@@ -35,9 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:padding="16dp"
+        android:textColor="@android:color/darker_gray"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:textColor="@android:color/darker_gray"
         tools:text="@string/news_section_text" />
 
     <View
