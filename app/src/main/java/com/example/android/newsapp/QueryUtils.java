@@ -170,6 +170,7 @@ public final class QueryUtils
         {
             return null;
         }
+
         List<News> articles = new ArrayList<>();
         try
         {
