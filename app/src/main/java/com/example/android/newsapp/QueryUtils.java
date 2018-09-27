@@ -174,7 +174,6 @@ public final class QueryUtils
         List<News> articles = new ArrayList<>();
         try
         {
-
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
 

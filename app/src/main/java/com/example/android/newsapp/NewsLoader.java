@@ -19,7 +19,6 @@ import java.util.List;
 
 public class NewsLoader extends AsyncTaskLoader<List<News>>
 {
-
     /**
      * Tag for log messages
      */
